@@ -1,7 +1,7 @@
 package main
 
 import (
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"github.com/vintkor/todo"
 	"github.com/vintkor/todo/pkg/handler"
@@ -11,7 +11,7 @@ import (
 
 func main() {
 	if err := initConfig(); err != nil {
-		log.Fatal("Cant read config")
+		logrus.Fatal("Cant read config")
 	}
 
 	repos := repository.NewRepository()
@@ -20,7 +20,7 @@ func main() {
 
 	server := new(todo.Server)
 	if err := server.Run(viper.GetString("port"), handlers.InitRoutes()); err != nil {
-		log.Fatalf("Error ocuped while running http server: %s", err)
+		logrus.Fatalf("Error ocuped while running http server: %s", err)
 	}
 }
 
